@@ -1,4 +1,3 @@
 package com.dcop.exceptions
 
-class InvalidCoordinatesException {
-}
+class InvalidCoordinatesException (val statusCode: Int, message: String) : Exception(message)

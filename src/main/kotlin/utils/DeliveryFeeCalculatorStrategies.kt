@@ -6,7 +6,7 @@ import kotlin.math.*
 
 typealias PriceFunction = (Int, Int, List<DistanceRange>) -> Int
 
-object DeliveryPriceCalculatorStrategies {
+object DeliveryFeeCalculatorStrategies {
 
     val default: PriceFunction = {
         basePrice: Int,
