@@ -28,7 +28,6 @@ fun appModule() = module {
     single { DeliveryFeeCalculator(DeliveryFeeCalculatorStrategies.default) }
     single { HomeAssignmentApiClient(get()) }
     single<DeliveryOrderPriceService> { DeliveryOrderPriceServiceImpl(get(), get(), get()) }
-//    single { ExceptionHandler() }
 //    single { KoinLogger() as Logger }
 }
 

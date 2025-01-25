@@ -7,10 +7,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class HomeAssignmentApiClient(private val client: HttpClient) {
     private val BASE_URL = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/"

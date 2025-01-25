@@ -30,9 +30,6 @@ fun loadConfig(): Config {
             logger = Logger.DEFAULT
             level = LogLevel.INFO
         }
-        defaultRequest {
-            url(apiBaseUrl)
-        }
     }
 
     return Config(httpClient, apiBaseUrl, maxRetries)

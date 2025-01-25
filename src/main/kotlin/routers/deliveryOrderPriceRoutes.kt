@@ -16,5 +16,5 @@ fun Route.deliveryOrderPriceRoutes() {
 
             val response = service.calculateDeliveryOrderPrice(venueSlug, cartValue, userLat, userLon)
             call.respond(response)
-    }
+            }
 }
