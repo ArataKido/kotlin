@@ -4,8 +4,8 @@ import com.dcop.clients.HomeAssignmentApiClient
 import com.dcop.services.DeliveryOrderPriceService
 import com.dcop.services.DeliveryOrderPriceServiceImpl
 import com.dcop.utils.DeliveryFeeCalculator
-import com.dcop.utils.DistanceCalculator
 import com.dcop.utils.DeliveryFeeCalculatorStrategies
+import com.dcop.utils.DistanceCalculator
 import com.dcop.utils.DistanceCalculatorStrategies
 import io.ktor.server.application.*
 import org.koin.dsl.module
