@@ -1,6 +1,7 @@
 val koin_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val kodein_version: String by project
 val ktor_version = "3.0.3"
 
 plugins {
@@ -24,20 +25,30 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-openapi:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-cio:$ktor_version")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
+    implementation("io.ktor:ktor-server-netty:$ktor_version")
+
     implementation("io.insert-koin:koin-ktor3:4.1.0-Beta5")
     implementation("io.insert-koin:koin-logger-slf4j:4.1.0-Beta5")
-    implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
-    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+
+    //Ktor Client
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-client-logging:$ktor_version")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+
+
+//    implementation("org.kodein.di:kodein-di:$kodein_version")
+    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:7.22.0")
 }

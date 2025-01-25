@@ -1,4 +1,5 @@
 package com.dcop.models
+
 import kotlinx.serialization.Serializable
 
 @Serializable

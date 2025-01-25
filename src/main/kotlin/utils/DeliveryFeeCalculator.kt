@@ -7,7 +7,7 @@ class DeliveryFeeCalculator(private var strategy: PriceFunction) {
         strategy = newStrategy
     }
 
-    fun calculateDeliveryFee(basePrice:Int, distance:Int, distanceRanges: List<DistanceRange>): Int {
+    fun calculateDeliveryFee(basePrice: Int, distance: Int, distanceRanges: List<DistanceRange>): Int {
         return strategy(basePrice, distance, distanceRanges)
     }
 }

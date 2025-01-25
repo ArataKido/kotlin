@@ -2,17 +2,17 @@ package com.dcop.services
 
 import com.dcop.clients.HomeAssignmentApiClient
 import com.dcop.models.DeliveryOrderPriceResponse
-import com.dcop.utils.DistanceCalculator
-import com.dcop.utils.DistanceCalculatorStrategies
 import com.dcop.utils.DeliveryFeeCalculator
 import com.dcop.utils.DeliveryFeeCalculatorStrategies
-import org.slf4j.LoggerFactory
+import com.dcop.utils.DistanceCalculator
+import com.dcop.utils.DistanceCalculatorStrategies
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.slf4j.LoggerFactory
 
 
-class DeliveryOrderPriceServiceImpl: DeliveryOrderPriceService{
-    private val client = HomeAssignmentApiClient()
+class DeliveryOrderPriceServiceImpl(private val client: HomeAssignmentApiClient) : DeliveryOrderPriceService {
+    //    val homeAssignmentApiClient: HomeAssignmentApiClient by inject()
     private val distanceCalculator = DistanceCalculator(DistanceCalculatorStrategies.haversine)
     private val deliveryFeeCalculator = DeliveryFeeCalculator(DeliveryFeeCalculatorStrategies.default)
     private val logger = LoggerFactory.getLogger(DeliveryOrderPriceServiceImpl::class.java)
@@ -26,9 +26,9 @@ class DeliveryOrderPriceServiceImpl: DeliveryOrderPriceService{
         cartValue: Int,
         userLat: Double,
         userLon: Double
-    ): DeliveryOrderPriceResponse = coroutineScope{
+    ): DeliveryOrderPriceResponse = coroutineScope {
         val staticDataDeferred = async { client.getStaticVenueData(venueSlug) }
-        val dynamicDataDeferred = async { client.getDynamicVenueData(venueSlug)}
+        val dynamicDataDeferred = async { client.getDynamicVenueData(venueSlug) }
 
 
         val staticData = staticDataDeferred.await()
@@ -46,7 +46,7 @@ class DeliveryOrderPriceServiceImpl: DeliveryOrderPriceService{
         val deliveryFee = deliveryFeeCalculator.calculateDeliveryFee(basePrice, distance, distanceRanges)
         val totalPrice = deliveryFee + smallOrderSurcharge + cartValue
         val delivery = DeliveryOrderPriceResponse.Delivery(deliveryFee, distance)
-        DeliveryOrderPriceResponse(totalPrice, smallOrderSurcharge, cartValue, delivery )
+        DeliveryOrderPriceResponse(totalPrice, smallOrderSurcharge, cartValue, delivery)
     }
 
 

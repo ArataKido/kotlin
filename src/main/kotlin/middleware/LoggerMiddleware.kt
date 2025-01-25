@@ -1,10 +1,8 @@
 package com.dcop.middleware
 
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.response.*
 import io.ktor.server.request.*
-import io.ktor.util.pipeline.*
 import org.slf4j.LoggerFactory
 import kotlin.system.measureTimeMillis
 

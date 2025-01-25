@@ -9,7 +9,7 @@ data class DeliveryOrderPriceResponse(
     @SerialName("small_order_surcharge") val smallOrderSurcharge: Int,
     @SerialName("cart_value") val cartValue: Int,
     val delivery: Delivery,
-){
+) {
     @Serializable
     data class Delivery(
         val fee: Int,

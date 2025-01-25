@@ -2,21 +2,20 @@ package com.dcop.utils
 
 import com.dcop.exceptions.OutOfRangeException
 import com.dcop.models.DistanceRange
-import kotlin.math.*
+import kotlin.math.roundToInt
 
 typealias PriceFunction = (Int, Int, List<DistanceRange>) -> Int
 
 object DeliveryFeeCalculatorStrategies {
 
-    val default: PriceFunction = {
-        basePrice: Int,
-        distance: Int,
-        distanceRanges: List<DistanceRange> ->
+    val default: PriceFunction = { basePrice: Int,
+                                   distance: Int,
+                                   distanceRanges: List<DistanceRange> ->
 
         // Find the applicable distance range
-        val applicableRange = distanceRanges.find { range ->
-            distance >= range.min && (range.max == 0 || distance < range.max)
-        } ?: throw OutOfRangeException(400, "Delivery not possible for the given distance: $distance meters")
+        val applicableRange =
+            distanceRanges.find { range -> distance >= range.min && (range.max == 0 || distance < range.max) }
+                ?: throw OutOfRangeException(400, "Delivery not possible for the given distance: $distance meters")
 
         // If max == 0 in the range, it means delivery is not possible
         if (applicableRange.max == 0) {

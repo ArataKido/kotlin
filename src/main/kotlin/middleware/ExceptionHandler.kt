@@ -1,6 +1,7 @@
 package com.dcop.middleware
 
 import com.dcop.exceptions.HttpException
+import com.dcop.exceptions.InvalidCoordinatesException
 import com.dcop.exceptions.OutOfRangeException
 import com.dcop.models.ExceptionResponse
 import io.ktor.http.*
@@ -28,6 +29,14 @@ object ExceptionHandler {
                     ExceptionResponse(cause.message ?: cause.toString(), cause.statusCode)
                 )
             }
+
+            is InvalidCoordinatesException -> {
+                call.respond(
+                    HttpStatusCode.InternalServerError,
+                    ExceptionResponse(cause.message ?: cause.toString(), cause.statusCode)
+                )
+            }
+
             else -> {
                 // All the other Exceptions become status 500, with more info in development mode.
                 if (developmentMode) {

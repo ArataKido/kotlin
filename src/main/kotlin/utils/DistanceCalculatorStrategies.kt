@@ -7,7 +7,7 @@ typealias DistanceFunction = (Double, Double, Double, Double) -> Int
 object DistanceCalculatorStrategies {
     private const val EARTH_RADIUS_METERS = 6371000.0
 
-    val haversine: DistanceFunction = {userLat: Double, userLon: Double, venueLat: Double, venueLon:Double ->
+    val haversine: DistanceFunction = { userLat: Double, userLon: Double, venueLat: Double, venueLon: Double ->
         val deltaLat = Math.toRadians(venueLat - userLat)
         val deltaLon = Math.toRadians(venueLon - userLon)
 
@@ -18,8 +18,7 @@ object DistanceCalculatorStrategies {
         (EARTH_RADIUS_METERS * c).roundToInt()
     }
 
-    val pythagoras: DistanceFunction = {
-        lat1: Double, lon1: Double, lat2: Double, lon2: Double ->
+    val pythagoras: DistanceFunction = { lat1: Double, lon1: Double, lat2: Double, lon2: Double ->
 
         val deltaLat = Math.toRadians(lat2 - lat1)
         val deltaLon = Math.toRadians(lon2 - lon1)
