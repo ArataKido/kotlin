@@ -3,23 +3,16 @@ package com.dcop.services
 import com.dcop.clients.HomeAssignmentApiClient
 import com.dcop.models.DeliveryOrderPriceResponse
 import com.dcop.utils.DeliveryFeeCalculator
-import com.dcop.utils.DeliveryFeeCalculatorStrategies
 import com.dcop.utils.DistanceCalculator
-import com.dcop.utils.DistanceCalculatorStrategies
-import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import org.slf4j.LoggerFactory
 
 
-class DeliveryOrderPriceServiceImpl(private val client: HomeAssignmentApiClient) : DeliveryOrderPriceService {
-    //    val homeAssignmentApiClient: HomeAssignmentApiClient by inject()
-    private val distanceCalculator = DistanceCalculator(DistanceCalculatorStrategies.haversine)
-    private val deliveryFeeCalculator = DeliveryFeeCalculator(DeliveryFeeCalculatorStrategies.default)
-    private val logger = LoggerFactory.getLogger(DeliveryOrderPriceServiceImpl::class.java)
+class DeliveryOrderPriceServiceImpl(
+    private val client: HomeAssignmentApiClient,
+    private val distanceCalculator: DistanceCalculator,
+    private val deliveryFeeCalculator: DeliveryFeeCalculator
+) : DeliveryOrderPriceService {
 
-    init {
-        logger.info("DeliveryOrderPriceServiceImpl initialized")
-    }
 
     override suspend fun calculateDeliveryOrderPrice(
         venueSlug: String,
@@ -27,16 +20,14 @@ class DeliveryOrderPriceServiceImpl(private val client: HomeAssignmentApiClient)
         userLat: Double,
         userLon: Double
     ): DeliveryOrderPriceResponse = coroutineScope {
-        val staticDataDeferred = async { client.getStaticVenueData(venueSlug) }
-        val dynamicDataDeferred = async { client.getDynamicVenueData(venueSlug) }
+        val clientResponse = client.fetchVenueData(venueSlug)
+        val staticData = clientResponse.first
+        val dynamicData = clientResponse.second
 
-
-        val staticData = staticDataDeferred.await()
         val venueLat: Double = staticData.venueRaw.location.coordinates[1]
         val venueLon: Double = staticData.venueRaw.location.coordinates[0]
         val distance = distanceCalculator.calculateDistance(userLat, userLon, venueLat, venueLon)
 
-        val dynamicData = dynamicDataDeferred.await()
 
         val basePrice: Int = dynamicData.venueRaw.deliverySpecs.deliveryPricing.basePrice
         val orderMinimumNoSurcharge: Int = dynamicData.venueRaw.deliverySpecs.orderMinimumNoSurcharge

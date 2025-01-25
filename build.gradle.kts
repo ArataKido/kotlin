@@ -25,11 +25,13 @@ repositories {
 }
 
 dependencies {
+    implementation("io.github.smiley4:ktor-swagger-ui:4.1.5")
+//    implementation("io.github.smiley4:ktor-openapi:5.0.0-beta.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
     implementation("io.ktor:ktor-server-core:$ktor_version")
-    implementation("io.ktor:ktor-server-openapi:$ktor_version")
+//    implementation("io.ktor:ktor-server-openapi:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
@@ -49,6 +51,4 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
 
 
-//    implementation("org.kodein.di:kodein-di:$kodein_version")
-    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:7.22.0")
 }

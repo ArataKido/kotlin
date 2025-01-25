@@ -11,9 +11,9 @@ fun main(args: Array<String>) {
 fun Application.module() {
 
     configureLoggingMiddleware()
-    configureHTTP()
     configureSerialization()
     configureFrameworks()
     configureRouting()
     configureExceptions()
+    configureHTTP()
 }
