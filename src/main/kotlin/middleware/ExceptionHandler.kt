@@ -30,6 +30,7 @@ object ExceptionHandler {
             else -> handleGenericException(call, cause, developmentMode)
         }
     }
+
     private suspend fun respondWithException(
         call: ApplicationCall,
         status: HttpStatusCode,

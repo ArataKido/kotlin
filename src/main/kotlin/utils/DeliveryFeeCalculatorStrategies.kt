@@ -19,8 +19,8 @@ object DeliveryFeeCalculatorStrategies {
             throw OutOfRangeException(400, "Delivery not possible for the given distance: $distance meters")
         }
 
-        val distanceFee = (applicableRange.b * distance / 10).roundToInt()
-        val deliveryFee = basePrice + applicableRange.a + distanceFee
+        val distanceFee: Int = (applicableRange.b * distance / 10).roundToInt()
+        val deliveryFee: Int = basePrice + applicableRange.a + distanceFee
 
         deliveryFee
     }

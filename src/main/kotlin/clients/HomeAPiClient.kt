@@ -17,9 +17,9 @@ class HomeAssignmentApiClient(private val client: HttpClient) {
     private val BASE_URL = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/"
 
     private suspend inline fun <reified T> fetchData(
-        endpoint:     String,
+        endpoint: String,
         errorMessage: String
-    ): T = withContext(Dispatchers.IO){
+    ): T = withContext(Dispatchers.IO) {
         try {
             val response = client.get("$BASE_URL$endpoint")
 
@@ -35,14 +35,14 @@ class HomeAssignmentApiClient(private val client: HttpClient) {
 
     private suspend fun getStaticVenueData(venueSlug: String): VenueStaticResponse {
         return fetchData(
-            endpoint     = "$venueSlug/static",
+            endpoint = "$venueSlug/static",
             errorMessage = "Failed to fetch static data for venueSlug: $venueSlug"
         )
     }
 
     private suspend fun getDynamicVenueData(venueSlug: String): VenueDynamicResponse {
         return fetchData(
-            endpoint     = "$venueSlug/dynamic",
+            endpoint = "$venueSlug/dynamic",
             errorMessage = "Failed to fetch dynamic data for venueSlug: $venueSlug"
         )
     }

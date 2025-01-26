@@ -6,12 +6,16 @@ import com.dcop.utils.DeliveryFeeCalculator
 import com.dcop.utils.DistanceCalculator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class DeliveryOrderPriceServiceImpl(
     private val client: HomeAssignmentApiClient,
     private val distanceCalculator: DistanceCalculator,
     private val deliveryFeeCalculator: DeliveryFeeCalculator
 ) : DeliveryOrderPriceService {
+    private val logger: Logger = LoggerFactory.getLogger("ServiceLogger")
+
     override suspend fun calculateDeliveryOrderPrice(
         venueSlug: String,
         cartValue: Int,
@@ -39,7 +43,7 @@ class DeliveryOrderPriceServiceImpl(
             val delivery = Delivery(deliveryFee, distance)
             DeliveryOrderPriceResponse(totalPrice, smallOrderSurcharge, cartValue, delivery)
         } catch (e: Exception) {
-            // Бла-бла-бла
+            logger.error("Error processing delivery price: ", e)
             throw e
         }
     }

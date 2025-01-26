@@ -12,10 +12,10 @@ import kotlin.math.pow
 
 object Config {
     private const val DEFAULT_API_BASE_URL = "https://api.example.com"
-    private const val DEFAULT_MAX_RETRIES  = 3
+    private const val DEFAULT_MAX_RETRIES = 3
 
     val apiBaseUrl: String = System.getenv("API_BASE_URL") ?: DEFAULT_API_BASE_URL
-    val maxRetries: Int    = System.getenv("MAX_RETRIES")?.toIntOrNull() ?: DEFAULT_MAX_RETRIES
+    val maxRetries: Int = System.getenv("MAX_RETRIES")?.toIntOrNull() ?: DEFAULT_MAX_RETRIES
 
     val httpClient: HttpClient by lazy {
         HttpClient(CIO) {

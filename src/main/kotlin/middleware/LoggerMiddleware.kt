@@ -13,7 +13,7 @@ fun Application.configureLoggingMiddleware() {
     intercept(ApplicationCallPipeline.Monitoring) {
         val request = call.request
         val method = request.httpMethod.value
-        val path   = request.path()
+        val path = request.path()
         val queryParams = request.queryString()
 
         logger.info("Received request: $method $path${if (queryParams.isNotBlank()) "?$queryParams" else ""}")
