@@ -2,6 +2,7 @@ package com.dcop
 
 
 import io.ktor.client.*
+import io.ktor.client.engine.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -17,8 +18,10 @@ object Config {
     val apiBaseUrl: String = System.getenv("API_BASE_URL") ?: DEFAULT_API_BASE_URL
     val maxRetries: Int = System.getenv("MAX_RETRIES")?.toIntOrNull() ?: DEFAULT_MAX_RETRIES
 
-    val httpClient: HttpClient by lazy {
-        HttpClient(CIO) {
+    val httpClient =  createHttpClient(CIO.create())
+
+    fun createHttpClient(engine:HttpClientEngine): HttpClient {
+        return HttpClient(engine) {
             install(ContentNegotiation) {
                 json(
                     Json {

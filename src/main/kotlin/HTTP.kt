@@ -1,34 +1,23 @@
 package com.dcop
 
-import io.github.smiley4.ktorswaggerui.SwaggerUI
-import io.github.smiley4.ktorswaggerui.routing.openApiSpec
-import io.github.smiley4.ktorswaggerui.routing.swaggerUI
+import com.dcop.routers.deliveryOrderPriceRoutes
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import io.ktor.server.plugins.openapi.*
+import io.ktor.server.plugins.swagger.*
+import io.swagger.codegen.v3.generators.html.*
 
 fun Application.configureHTTP() {
-    // Install and configure the OpenAPI plugin
-    install(SwaggerUI) {
-        info {
-            title = "My API"
-            version = "1.0.0"
-            description = "API documentation for my Ktor application."
-        }
-        server {
-            url = "http://localhost:8080"
-            description = "Local development server"
-        }
-    }
 
-    // Configure routing
     routing {
-        // Create a route for the openapi-spec file.
-        route("api.json") {
-            openApiSpec()
+
+        openAPI(path="openapi", ) {
+            codegen = StaticHtmlCodegen()
         }
-        // Create a route for the swagger-ui using the openapi-spec at "/api.json".
-        route("swagger") {
-            swaggerUI("/api.json")
+        swaggerUI(path = "swagger", ) {
+            version = "4.15.5"
         }
+        deliveryOrderPriceRoutes()
+
     }
 }

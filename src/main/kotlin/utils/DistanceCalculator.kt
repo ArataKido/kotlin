@@ -3,7 +3,7 @@ package com.dcop.utils
 import com.dcop.exceptions.InvalidCoordinatesException
 
 class DistanceCalculator(private var strategy: DistanceFunction) {
-    fun set_strategy(newStrategy: DistanceFunction) {
+    fun setStrategy(newStrategy: DistanceFunction) {
         strategy = newStrategy
     }
 

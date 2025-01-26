@@ -3,7 +3,7 @@ package com.dcop.utils
 import com.dcop.models.DistanceRange
 
 class DeliveryFeeCalculator(private var strategy: PriceFunction) {
-    fun set_strategy(newStrategy: PriceFunction) {
+    fun setStrategy(newStrategy: PriceFunction) {
         strategy = newStrategy
     }
 
