@@ -1,11 +1,9 @@
 val koin_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
-val kodein_version: String by project
-val ktor_version = "3.0.3"
-val mockk_version = "1.13.16"
-val truth_version = "1.4.4"
-val swagger_codegen_version = "1.0.55"
+val ktor_version: String by project
+val mockk_version: String by project
+val truth_version: String by project
 
 plugins {
     kotlin("jvm") version "2.1.0"
@@ -29,11 +27,8 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
-    implementation("io.swagger.codegen.v3:swagger-codegen-generators:$swagger_codegen_version")
     implementation("io.ktor:ktor-server-openapi:$ktor_version")
-//    implementation("io.github.smiley4:ktor-openapi:5.0.0-beta.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
@@ -41,8 +36,8 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
 
-    implementation("io.insert-koin:koin-ktor3:4.1.0-Beta5")
-    implementation("io.insert-koin:koin-logger-slf4j:4.1.0-Beta5")
+    implementation("io.insert-koin:koin-ktor3:$koin_version")
+    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
     //Ktor Client
@@ -51,14 +46,14 @@ dependencies {
     implementation("io.ktor:ktor-client-logging:$ktor_version")
     implementation("io.ktor:ktor-client-core:$ktor_version")
 
-    implementation("com.google.truth:truth:$truth_version")
+    //Tests
+    testImplementation("com.google.truth:truth:$truth_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.mockk:mockk:${mockk_version}")
     testImplementation("io.ktor:ktor-client-mock:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
-
-    testImplementation("io.insert-koin:koin-test:4.1.0-Beta5")
-    testImplementation("io.insert-koin:koin-test-junit4:4.1.0-Beta5")
+    testImplementation("io.insert-koin:koin-test:$koin_version")
+    testImplementation("io.insert-koin:koin-test-junit4:$koin_version")
 
 
 }

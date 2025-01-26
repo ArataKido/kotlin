@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Application API</title>
+  <title>Delivery Order Price API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -706,8 +706,8 @@
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
-                    <li data-group="Default" data-name="rootGet" class="">
-                      <a href="#api-Default-rootGet">rootGet</a>
+                    <li data-group="Default" data-name="apiV1DeliveryOrderPriceGet" class="">
+                      <a href="#api-Default-apiV1DeliveryOrderPriceGet">apiV1DeliveryOrderPriceGet</a>
                     </li>
           </ul>
         </nav>
@@ -715,7 +715,7 @@
       <div id="content">
         <div id="project">
           <div class="pull-left">
-            <h1>Application API</h1>
+            <h1>Delivery Order Price API</h1>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -724,49 +724,49 @@
             <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
               <div class="app-desc">Version: 1.0.0</div>
             <hr>
-            <div>Application API</div>
+            <div>API to calculate the delivery order price based on the given parameters.</div>
           </div>
         </div>
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
-                    <div id="api-Default-rootGet">
-                      <article id="api-Default-rootGet-0" data-group="User" data-name="rootGet" data-version="0">
+                    <div id="api-Default-apiV1DeliveryOrderPriceGet">
+                      <article id="api-Default-apiV1DeliveryOrderPriceGet-0" data-group="User" data-name="apiV1DeliveryOrderPriceGet" data-version="0">
                         <div class="pull-left">
-                          <h1>rootGet</h1>
-                          <p></p>
+                          <h1>apiV1DeliveryOrderPriceGet</h1>
+                          <p>Get delivery order price</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Hello World!</p>
+                        <p class="marked">Calculates the delivery order price based on the venue slug, cart value, and user location (latitude and longitude).</p>
                         <p></p>
                         <br />
-                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/v1/delivery-order-price</span></code></pre>
                         <p>
                           <h3>Usage and SDK Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-Default-rootGet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Default-rootGet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Default-rootGet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Default-rootGet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Default-rootGet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Default-rootGet-0-python">Python</a></li>
+                          <li class="active"><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-apiV1DeliveryOrderPriceGet-0-python">Python</a></li>
                         </ul>
 
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Default-rootGet-0-curl">
+                          <div class="tab-pane active" id="examples-Default-apiV1DeliveryOrderPriceGet-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
--H "Accept: text/plain"\
-"http://0.0.0.0:8080/"</code></pre>
+-H "Accept: application/json"\
+"//api/v1/delivery-order-price?venue_slug=&cart_value=&user_lat=&user_lon="</code></pre>
                           </div>
-                          <div class="tab-pane" id="examples-Default-rootGet-0-java">
+                          <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
@@ -780,44 +780,60 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
+        String venueSlug = venueSlug_example; // String | The unique identifier for the venue.
+        Integer cartValue = 56; // Integer | The total value of items in the user's cart (in cents).
+        Double userLat = 1.2; // Double | The latitude of the user's location.
+        Double userLon = 1.2; // Double | The longitude of the user's location.
         try {
-            'String' result = apiInstance.rootGet();
+            Object result = apiInstance.apiV1DeliveryOrderPriceGet(venueSlug, cartValue, userLat, userLon);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#rootGet");
+            System.err.println("Exception when calling DefaultApi#apiV1DeliveryOrderPriceGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
 
-                          <div class="tab-pane" id="examples-Default-rootGet-0-android">
+                          <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-android">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.DefaultApi;
 
 public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
+        String venueSlug = venueSlug_example; // String | The unique identifier for the venue.
+        Integer cartValue = 56; // Integer | The total value of items in the user's cart (in cents).
+        Double userLat = 1.2; // Double | The latitude of the user's location.
+        Double userLon = 1.2; // Double | The longitude of the user's location.
         try {
-            'String' result = apiInstance.rootGet();
+            Object result = apiInstance.apiV1DeliveryOrderPriceGet(venueSlug, cartValue, userLat, userLon);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling DefaultApi#rootGet");
+            System.err.println("Exception when calling DefaultApi#apiV1DeliveryOrderPriceGet");
             e.printStackTrace();
         }
     }
 }</code></pre>
                           </div>
   <!--
-  <div class="tab-pane" id="examples-Default-rootGet-0-groovy">
+  <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-groovy">
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
-                            <div class="tab-pane" id="examples-Default-rootGet-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *venueSlug = venueSlug_example; // The unique identifier for the venue.
+Integer *cartValue = 56; // The total value of items in the user's cart (in cents).
+Double *userLat = 1.2; // The latitude of the user's location.
+Double *userLon = 1.2; // The longitude of the user's location.
+
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
-[apiInstance rootGetWithCompletionHandler: 
-              ^('String' output, NSError* error) {
+// Get delivery order price
+[apiInstance apiV1DeliveryOrderPriceGetWith:venueSlug
+    cartValue:cartValue
+    userLat:userLat
+    userLon:userLon
+              completionHandler: ^(Object output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -828,10 +844,15 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">var ApplicationApi = require('application_api');
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var DeliveryOrderPriceApi = require('delivery_order_price_api');
 
-var api = new ApplicationApi.DefaultApi()
+var api = new DeliveryOrderPriceApi.DefaultApi()
+var venueSlug = venueSlug_example; // {{String}} The unique identifier for the venue.
+var cartValue = 56; // {{Integer}} The total value of items in the user's cart (in cents).
+var userLat = 1.2; // {{Double}} The latitude of the user's location.
+var userLon = 1.2; // {{Double}} The longitude of the user's location.
+
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -839,14 +860,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.rootGet(callback);
+api.apiV1DeliveryOrderPriceGet(venueSlug, cartValue, userLat, userLon, callback);
 </code></pre>
                             </div>
 
-                            <!--<div class="tab-pane" id="examples-Default-rootGet-0-angular">
+                            <!--<div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-angular">
               <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
             </div>-->
-                            <div class="tab-pane" id="examples-Default-rootGet-0-csharp">
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-csharp">
                               <pre class="prettyprint"><code class="language-cs">using System;
 using System.Diagnostics;
 using IO.Swagger.Api;
@@ -855,21 +876,26 @@ using IO.Swagger.Model;
 
 namespace Example
 {
-    public class rootGetExample
+    public class apiV1DeliveryOrderPriceGetExample
     {
         public void main()
         {
 
             var apiInstance = new DefaultApi();
+            var venueSlug = venueSlug_example;  // String | The unique identifier for the venue.
+            var cartValue = 56;  // Integer | The total value of items in the user's cart (in cents).
+            var userLat = 1.2;  // Double | The latitude of the user's location.
+            var userLon = 1.2;  // Double | The longitude of the user's location.
 
             try
             {
-                'String' result = apiInstance.rootGet();
+                // Get delivery order price
+                Object result = apiInstance.apiV1DeliveryOrderPriceGet(venueSlug, cartValue, userLat, userLon);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling DefaultApi.rootGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.apiV1DeliveryOrderPriceGet: " + e.Message );
             }
         }
     }
@@ -877,38 +903,46 @@ namespace Example
 </code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-php">
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-php">
                               <pre class="prettyprint"><code class="language-php"><&#63;php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
+$venueSlug = venueSlug_example; // String | The unique identifier for the venue.
+$cartValue = 56; // Integer | The total value of items in the user's cart (in cents).
+$userLat = 1.2; // Double | The latitude of the user's location.
+$userLon = 1.2; // Double | The longitude of the user's location.
 
 try {
-    $result = $api_instance->rootGet();
+    $result = $api_instance->apiV1DeliveryOrderPriceGet($venueSlug, $cartValue, $userLat, $userLon);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->rootGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->apiV1DeliveryOrderPriceGet: ', $e->getMessage(), PHP_EOL;
 }
 ?></code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-perl">
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-perl">
                               <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
 use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
+my $venueSlug = venueSlug_example; # String | The unique identifier for the venue.
+my $cartValue = 56; # Integer | The total value of items in the user's cart (in cents).
+my $userLat = 1.2; # Double | The latitude of the user's location.
+my $userLon = 1.2; # Double | The longitude of the user's location.
 
 eval { 
-    my $result = $api_instance->rootGet();
+    my $result = $api_instance->apiV1DeliveryOrderPriceGet(venueSlug => $venueSlug, cartValue => $cartValue, userLat => $userLat, userLon => $userLon);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling DefaultApi->rootGet: $@\n";
+    warn "Exception when calling DefaultApi->apiV1DeliveryOrderPriceGet: $@\n";
 }</code></pre>
                             </div>
 
-                            <div class="tab-pane" id="examples-Default-rootGet-0-python">
+                            <div class="tab-pane" id="examples-Default-apiV1DeliveryOrderPriceGet-0-python">
                               <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
 import time
 import swagger_client
@@ -917,12 +951,17 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
+venueSlug = venueSlug_example # String | The unique identifier for the venue.
+cartValue = 56 # Integer | The total value of items in the user's cart (in cents).
+userLat = 1.2 # Double | The latitude of the user's location.
+userLon = 1.2 # Double | The longitude of the user's location.
 
 try: 
-    api_response = api_instance.root_get()
+    # Get delivery order price
+    api_response = api_instance.api_v1_delivery_order_price_get(venueSlug, cartValue, userLat, userLon)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling DefaultApi->rootGet: %s\n" % e)</code></pre>
+    print("Exception when calling DefaultApi->apiV1DeliveryOrderPriceGet: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -932,39 +971,167 @@ except ApiException as e:
 
 
 
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">venue_slug*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiV1DeliveryOrderPriceGet_venueSlug">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    String
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        The unique identifier for the venue.
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">cart_value*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiV1DeliveryOrderPriceGet_cartValue">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Integer
+                                                </span>
+                                
+                                                    <div class="inner description">
+                                                        The total value of items in the user&#x27;s cart (in cents).
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">user_lat*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiV1DeliveryOrderPriceGet_userLat">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Double
+                                                </span>
+                                                    <span class="format">
+                                                        (double)
+                                                    </span>
+                                
+                                                    <div class="inner description">
+                                                        The latitude of the user&#x27;s location.
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                                <tr><td style="width:150px;">user_lon*</td>
+                                <td>
+                                
+                                
+                                    <div id="d2e199_apiV1DeliveryOrderPriceGet_userLon">
+                                        <div class="json-schema-view">
+                                            <div class="primitive">
+                                                <span class="type">
+                                                    Double
+                                                </span>
+                                                    <span class="format">
+                                                        (double)
+                                                    </span>
+                                
+                                                    <div class="inner description">
+                                                        The longitude of the user&#x27;s location.
+                                                    </div>
+                                            </div>
+                                                <div class="inner required">
+                                                    Required
+                                                </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                            </table>
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
+                            <h3> Status: 200 - Successful calculation of delivery order price. </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-rootGet-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-apiV1DeliveryOrderPriceGet-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-rootGet-200-schema">
-                                  <div id='responses-rootGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-apiV1DeliveryOrderPriceGet-200-schema">
+                                  <div id='responses-apiV1DeliveryOrderPriceGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "OK",
+  "description" : "Successful calculation of delivery order price.",
   "content" : {
-    "text/plain" : {
+    "application/json" : {
       "schema" : {
-        "type" : "string",
-        "x-content-type" : "text/plain"
-      },
-      "examples" : {
-        "Example#1" : {
-          "value" : "Hello World!"
-        }
+        "type" : "object",
+        "properties" : {
+          "total_price" : {
+            "type" : "integer",
+            "description" : "The total price including delivery fees (in cents).",
+            "example" : 1190
+          },
+          "small_order_surcharge" : {
+            "type" : "integer",
+            "description" : "The surcharge for small orders (in cents).",
+            "example" : 0
+          },
+          "cart_value" : {
+            "type" : "integer",
+            "description" : "The value of the items in the cart (in cents).",
+            "example" : 1000
+          },
+          "delivery" : {
+            "type" : "object",
+            "properties" : {
+              "fee" : {
+                "type" : "integer",
+                "description" : "The delivery fee (in cents).",
+                "example" : 190
+              },
+              "distance" : {
+                "type" : "integer",
+                "description" : "The delivery distance (in meters).",
+                "example" : 177
+              }
+            }
+          }
+        },
+        "x-content-type" : "application/json"
       }
     }
   }
 };
-                                        var schema = schemaWrapper.content["text/plain"].schema;
+                                        var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
@@ -977,14 +1144,70 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-rootGet-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-rootGet-200-schema-200');
+                                        $('#responses-apiV1DeliveryOrderPriceGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiV1DeliveryOrderPriceGet-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-rootGet-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-apiV1DeliveryOrderPriceGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Missing required parameters. </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-apiV1DeliveryOrderPriceGet-400-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-apiV1DeliveryOrderPriceGet-400-schema">
+                                  <div id='responses-apiV1DeliveryOrderPriceGet-400-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Missing required parameters.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string",
+            "description" : "A message indicating the missing parameters.",
+            "example" : "Missing parameters: venue_slug, cart_value, user_lat, user_lon"
+          }
+        },
+        "x-content-type" : "application/json"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-apiV1DeliveryOrderPriceGet-400-schema-data').val(stringify(schema));
+                                        var result = $('#responses-apiV1DeliveryOrderPriceGet-400-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-apiV1DeliveryOrderPriceGet-400-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

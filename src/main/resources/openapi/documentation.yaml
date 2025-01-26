@@ -1,23 +1,86 @@
-openapi: "3.0.3"
+openapi: 3.0.0
 info:
-  title: "Application API"
-  description: "Application API"
-  version: "1.0.0"
-servers:
-  - url: "http://0.0.0.0:8080"
+  title: Delivery Order Price API
+  description: API to calculate the delivery order price based on the given parameters.
+  version: 1.0.0
 paths:
-  /:
+  /api/v1/delivery-order-price:
     get:
-      description: "Hello World!"
+      summary: Get delivery order price
+      description: Calculates the delivery order price based on the venue slug, cart value, and user location (latitude and longitude).
+      parameters:
+        - name: venue_slug
+          in: query
+          required: true
+          description: The unique identifier for the venue.
+          schema:
+            type: string
+            example: "home-assignment-venue-stockholm"
+        - name: cart_value
+          in: query
+          required: true
+          description: The total value of items in the user's cart (in cents).
+          schema:
+            type: integer
+            example: 1000
+        - name: user_lat
+          in: query
+          required: true
+          description: The latitude of the user's location.
+          schema:
+            type: number
+            format: double
+            example: 59.3581142
+        - name: user_lon
+          in: query
+          required: true
+          description: The longitude of the user's location.
+          schema:
+            type: number
+            format: double
+            example: 18.0437262
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: Successful calculation of delivery order price.
           content:
-            text/plain:
+            application/json:
               schema:
-                type: "string"
-              examples:
-                Example#1:
-                  value: "Hello World!"
+                type: object
+                properties:
+                  total_price:
+                    type: integer
+                    description: The total price including delivery fees (in cents).
+                    example: 1190
+                  small_order_surcharge:
+                    type: integer
+                    description: The surcharge for small orders (in cents).
+                    example: 0
+                  cart_value:
+                    type: integer
+                    description: The value of the items in the cart (in cents).
+                    example: 1000
+                  delivery:
+                    type: object
+                    properties:
+                      fee:
+                        type: integer
+                        description: The delivery fee (in cents).
+                        example: 190
+                      distance:
+                        type: integer
+                        description: The delivery distance (in meters).
+                        example: 177
+        '400':
+          description: Missing required parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: A message indicating the missing parameters.
+                    example: "Missing parameters: venue_slug, cart_value, user_lat, user_lon"
+
 components:
   schemas: { }

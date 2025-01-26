@@ -9,10 +9,9 @@ fun main(args: Array<String>) {
 
 
 fun Application.module() {
+    configureHTTP()
     configureLoggingMiddleware()
     configureSerialization()
     configureFrameworks()
-    configureRouting()
     configureExceptions()
-    configureHTTP()
 }

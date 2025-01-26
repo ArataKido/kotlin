@@ -17,6 +17,10 @@ fun Application.configureFrameworks() {
         slf4jLogger()
         modules(appModule())
     }
+    monitor.subscribe(ApplicationStopping) {
+        println("Shutting down HttpClient...")
+        Config.closeHttpClient() // Cleanly shuts down the client
+    }
 }
 
 fun appModule() = module {
@@ -26,8 +30,7 @@ fun appModule() = module {
     single { get<Config>().maxRetries }
     single { DistanceCalculator(DistanceCalculatorStrategies.haversine) }
     single { DeliveryFeeCalculator(DeliveryFeeCalculatorStrategies.default) }
-    single { HomeAssignmentApiClient(get()) }
+    single { HomeAssignmentApiClient(get(), get()) }
     single<DeliveryOrderPriceService> { DeliveryOrderPriceServiceImpl(get(), get(), get()) }
-//    single { KoinLogger() as Logger }
 }
 
