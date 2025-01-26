@@ -3,6 +3,9 @@ val kotlin_version: String by project
 val logback_version: String by project
 val kodein_version: String by project
 val ktor_version = "3.0.3"
+val mockk_version = "1.13.16"
+val truth_version = "1.4.4"
+val swagger_codegen_version = "1.0.55"
 
 plugins {
     kotlin("jvm") version "2.1.0"
@@ -25,13 +28,14 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.smiley4:ktor-swagger-ui:4.1.5")
+    implementation("io.ktor:ktor-server-swagger:$ktor_version")
+    implementation("io.swagger.codegen.v3:swagger-codegen-generators:$swagger_codegen_version")
+    implementation("io.ktor:ktor-server-openapi:$ktor_version")
 //    implementation("io.github.smiley4:ktor-openapi:5.0.0-beta.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
     implementation("io.ktor:ktor-server-core:$ktor_version")
-//    implementation("io.ktor:ktor-server-openapi:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
@@ -47,8 +51,14 @@ dependencies {
     implementation("io.ktor:ktor-client-logging:$ktor_version")
     implementation("io.ktor:ktor-client-core:$ktor_version")
 
+    implementation("com.google.truth:truth:$truth_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("io.mockk:mockk:${mockk_version}")
+    testImplementation("io.ktor:ktor-client-mock:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+
+    testImplementation("io.insert-koin:koin-test:4.1.0-Beta5")
+    testImplementation("io.insert-koin:koin-test-junit4:4.1.0-Beta5")
 
 
 }
