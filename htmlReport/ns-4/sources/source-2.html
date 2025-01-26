@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LoggerMiddlewareKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.dcop.middleware</a>
+</div>
+
+<h1>Coverage Summary for Class: LoggerMiddlewareKt (com.dcop.middleware)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggerMiddlewareKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LoggerMiddlewareKt$configureLoggingMiddleware$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.dcop.middleware
+&nbsp;
+&nbsp;import io.ktor.http.*
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.server.request.*
+&nbsp;import org.slf4j.Logger
+&nbsp;import org.slf4j.LoggerFactory
+&nbsp;import kotlin.system.measureTimeMillis
+&nbsp;
+&nbsp;fun Application.configureLoggingMiddleware() {
+<b class="nc">&nbsp;    val logger: Logger = LoggerFactory.getLogger(&quot;RequestLogger&quot;)</b>
+&nbsp;
+<b class="nc">&nbsp;    intercept(ApplicationCallPipeline.Monitoring) {</b>
+<b class="nc">&nbsp;        val request = call.request</b>
+<b class="nc">&nbsp;        val method = request.httpMethod.value</b>
+<b class="nc">&nbsp;        val path = request.path()</b>
+<b class="nc">&nbsp;        val queryParams = request.queryString()</b>
+&nbsp;
+<b class="nc">&nbsp;        logger.info(&quot;Received request: $method $path${if (queryParams.isNotBlank()) &quot;?$queryParams&quot; else &quot;&quot;}&quot;)</b>
+&nbsp;
+<b class="nc">&nbsp;        var status: HttpStatusCode = HttpStatusCode.OK</b>
+<b class="nc">&nbsp;        val timeTaken = measureTimeMillis {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                proceed()</b>
+<b class="nc">&nbsp;                status = call.response.status() ?: HttpStatusCode.OK</b>
+&nbsp;            } catch (e: Exception) {
+<b class="nc">&nbsp;                status = HttpStatusCode.InternalServerError</b>
+<b class="nc">&nbsp;                logger.error(&quot;Error processing request: $method $path&quot;, e)</b>
+&nbsp;                throw e
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        logger.info(&quot;Completed request: $method $path - Status: $status - Duration: ${timeTaken}ms&quot;)</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-26 21:05</div>
+</div>
+</body>
+</html>

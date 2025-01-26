@@ -12,6 +12,9 @@ import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 
+/**
+ * Configures the application frameworks, including dependency injection with Koin.
+ */
 fun Application.configureFrameworks() {
     install(Koin) {
         slf4jLogger()
@@ -23,6 +26,9 @@ fun Application.configureFrameworks() {
     }
 }
 
+/**
+ * Defines the application's dependency injection module.
+ */
 fun appModule() = module {
     single { Config }
     single { get<Config>().httpClient }

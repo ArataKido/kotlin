@@ -6,7 +6,15 @@ class DistanceCalculator(private var strategy: DistanceFunction) {
     fun setStrategy(newStrategy: DistanceFunction) {
         strategy = newStrategy
     }
-
+    /**
+     * Calculates the distance between two points.
+     *
+     * @param userLat Latitude of the user.
+     * @param userLon Longitude of the user.
+     * @param venueLat Latitude of the venue.
+     * @param venueLon Longitude of the venue.
+     * @return The calculated distance in meters.
+     */
     fun calculateDistance(
         userLat: Double,
         userLon: Double,

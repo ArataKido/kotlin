@@ -7,8 +7,17 @@ import com.dcop.models.ExceptionResponse
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-
+/**
+ * Handles exceptions and sends appropriate HTTP responses.
+ */
 object ExceptionHandler {
+    /**
+     * Handles different types of exceptions and responds with appropriate status codes and messages.
+     *
+     * @param call The ApplicationCall to respond to.
+     * @param cause The Throwable that caused the exception.
+     * @param developmentMode Whether the application is running in development mode.
+     */
     suspend fun handle(
         call: ApplicationCall,
         cause: Throwable,

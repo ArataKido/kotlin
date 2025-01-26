@@ -9,6 +9,10 @@ import kotlinx.coroutines.withContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/**
+ * Implementation of the Delivery Order Price Service.
+ * Calculates delivery order prices using the Home Assignment API and utility classes.
+ */
 class DeliveryOrderPriceServiceImpl(
     private val client: HomeAssignmentApiClient,
     private val distanceCalculator: DistanceCalculator,
@@ -52,36 +56,3 @@ class DeliveryOrderPriceServiceImpl(
         return if (cartValue < orderMinimum) orderMinimum - cartValue else 0
     }
 }
-
-//// Чето там на исключенском
-//class DeliveryPriceCalculationException(message: String, cause: Throwable) : Exception(message, cause)
-
-//class DeliveryOrderPriceServiceImpl(
-//    private val client: HomeAssignmentApiClient,
-//    private val distanceCalculator: DistanceCalculator,
-//    private val deliveryFeeCalculator: DeliveryFeeCalculator
-//) : DeliveryOrderPriceService {
-//    override suspend fun calculateDeliveryOrderPrice(
-//        venueSlug: String,
-//        cartValue: Int,
-//        userLat: Double,
-//        userLon: Double
-//    ): DeliveryOrderPriceResponse = coroutineScope {
-//        val (staticData, dynamicData) = client.fetchVenueData(venueSlug)
-//
-//        val venueLat: Double = staticData.staticVenueRaw.location.coordinates.latitude
-//        val venueLon: Double = staticData.staticVenueRaw.location.coordinates.longitude
-//        val distance = distanceCalculator.calculateDistance(userLat, userLon, venueLat, venueLon)
-//
-//        val basePrice: Int = dynamicData.dynamicVenueRaw.deliverySpecs.deliveryPricing.basePrice
-//        val orderMinimumNoSurcharge: Int = dynamicData.dynamicVenueRaw.deliverySpecs.orderMinimumNoSurcharge
-//        val distanceRanges = dynamicData.dynamicVenueRaw.deliverySpecs.deliveryPricing.distanceRanges
-//
-//        val smallOrderSurcharge = maxOf(0, orderMinimumNoSurcharge - cartValue)
-//        val deliveryFee = deliveryFeeCalculator.calculateDeliveryFee(basePrice, distance, distanceRanges)
-//        val totalPrice = deliveryFee + smallOrderSurcharge + cartValue
-//        val delivery = Delivery(deliveryFee, distance)
-//        DeliveryOrderPriceResponse(totalPrice, smallOrderSurcharge, cartValue, delivery)
-//    }
-//
-//}

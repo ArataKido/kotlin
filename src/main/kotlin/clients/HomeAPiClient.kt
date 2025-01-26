@@ -13,9 +13,19 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
+/**
+ * Client for interacting with the Home Assignment API.
+ * Fetches static and dynamic venue information.
+ */
 class HomeAssignmentApiClient(private val client: HttpClient, val BASE_URL:String) {
-//    val BASE_URL = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/"
 
+    /**
+     * Generic method for fetching data from API
+     *
+     * @param endpoint The endpoint where the reqeust must be sent
+     * @param errorMessage The error message which will be returned in case of unsuccessful request
+     * @return The .
+     */
     private suspend inline fun <reified T> fetchData(
         endpoint: String,
         errorMessage: String
@@ -33,6 +43,12 @@ class HomeAssignmentApiClient(private val client: HttpClient, val BASE_URL:Strin
         }
     }
 
+    /**
+     * Fetches static venue information.
+     *
+     * @param venueSlug The unique identifier for the venue.
+     * @return The static venue information.
+     */
     private suspend fun getStaticVenueData(venueSlug: String): VenueStaticResponse {
         return fetchData(
             endpoint = "$venueSlug/static",
@@ -40,6 +56,12 @@ class HomeAssignmentApiClient(private val client: HttpClient, val BASE_URL:Strin
         )
     }
 
+    /**
+     * Fetches dynamic venue information.
+     *
+     * @param venueSlug The unique identifier for the venue.
+     * @return The dynamic venue information.
+     */
     private suspend fun getDynamicVenueData(venueSlug: String): VenueDynamicResponse {
         return fetchData(
             endpoint = "$venueSlug/dynamic",
