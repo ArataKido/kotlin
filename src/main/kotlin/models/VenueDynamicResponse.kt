@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class VenueDynamicResponse(
-    @SerialName("venue_raw") val venueRaw: VenueRaw
+    @SerialName("venue_raw") val dynamicVenueRaw: DynamicVenueRaw
 )
 
 @Serializable
-data class VenueRaw(
+data class DynamicVenueRaw(
     @SerialName("delivery_specs") val deliverySpecs: DeliverySpecs
 )
 

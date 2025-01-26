@@ -7,28 +7,34 @@ class DistanceCalculator(private var strategy: DistanceFunction) {
         strategy = newStrategy
     }
 
-    fun calculateDistance(userLat: Double, userLon: Double, venueLat: Double, venueLon: Double): Int {
-        when {
-            userLat !in -90.0..90.0 -> throw InvalidCoordinatesException(
-                400,
-                "Invalid latitude for user: $userLat. Latitude must be between -90 and 90."
-            )
+    fun calculateDistance(
+        userLat: Double,
+        userLon: Double,
+        venueLat: Double,
+        venueLon: Double
+    ): Int {
+        validateLatitude(userLat, "user")
+        validateLatitude(venueLat, "venue")
+        validateLongitude(userLon, "user")
+        validateLongitude(venueLon, "venue")
 
-            venueLat !in -90.0..90.0 -> throw InvalidCoordinatesException(
-                500,
-                "Invalid latitude for venue: $venueLat. Latitude must be between -90 and 90."
-            )
+        return strategy(userLat, userLon, venueLat, venueLon)
+    }
 
-            userLon !in -180.0..180.0 -> throw InvalidCoordinatesException(
-                400,
-                "Invalid longitude for user: $userLon. longitude must be between -180 and 180."
-            )
 
-            venueLon !in -180.0..180.0 -> throw InvalidCoordinatesException(
-                500,
-                "Invalid longitude for venue: $venueLon. longitude must be between -180 and 180."
+    private fun validateLatitude(lat: Double, entity: String) {
+        require(lat in -90.0..90.0) {
+            InvalidCoordinatesException(
+                400, "Invalid latitude for $entity $lat. Latitude must be between -90 and 90."
             )
         }
-        return strategy(userLat, userLon, venueLat, venueLon)
+    }
+
+    private fun validateLongitude(lon: Double, entity: String) {
+        require(lon in -180.0..180.0) {
+            InvalidCoordinatesException(
+                400, "Invalid longitude for $entity: $lon. Longitude must be between -180 and 180."
+            )
+        }
     }
 }

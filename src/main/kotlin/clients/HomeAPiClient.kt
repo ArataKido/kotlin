@@ -1,6 +1,7 @@
 package com.dcop.clients
 
 import com.dcop.exceptions.HttpException
+import com.dcop.models.VenueData
 import com.dcop.models.VenueDynamicResponse
 import com.dcop.models.VenueStaticResponse
 import io.ktor.client.*
@@ -15,33 +16,40 @@ import kotlinx.coroutines.withContext
 class HomeAssignmentApiClient(private val client: HttpClient) {
     private val BASE_URL = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/"
 
-    private suspend fun getStaticVenueData(venueSlug: String): VenueStaticResponse = withContext(Dispatchers.IO) {
+    private suspend inline fun <reified T> fetchData(
+        endpoint:     String,
+        errorMessage: String
+    ): T = withContext(Dispatchers.IO){
         try {
-            val response = client.get("$BASE_URL$venueSlug/static")
+            val response = client.get("$BASE_URL$endpoint")
+
             if (!response.status.isSuccess()) {
-                throw HttpException(response.status.value, "Failed to fetch static data for venueSlug: $venueSlug")
+                throw HttpException(response.status.value, errorMessage)
             }
+
             response.body()
         } catch (e: Exception) {
-            throw HttpException(500, "Error fetching static data: ${e.message}")
+            throw HttpException(500, "$errorMessage: ${e.message}")
         }
     }
 
-    private suspend fun getDynamicVenueData(venueSlug: String): VenueDynamicResponse = withContext(Dispatchers.IO) {
-        try {
-            val response = client.get("$BASE_URL$venueSlug/dynamic")
-            if (!response.status.isSuccess()) {
-                throw HttpException(response.status.value, "Failed to fetch static data for venue_slug: {venue_slug}")
-            }
-            response.body()
-        } catch (e: Exception) {
-            throw HttpException(500, "Error fetching dynamic data: ${e.message}")
-        }
+    private suspend fun getStaticVenueData(venueSlug: String): VenueStaticResponse {
+        return fetchData(
+            endpoint     = "$venueSlug/static",
+            errorMessage = "Failed to fetch static data for venueSlug: $venueSlug"
+        )
     }
 
-    suspend fun fetchVenueData(venueSlug: String) = coroutineScope {
+    private suspend fun getDynamicVenueData(venueSlug: String): VenueDynamicResponse {
+        return fetchData(
+            endpoint     = "$venueSlug/dynamic",
+            errorMessage = "Failed to fetch dynamic data for venueSlug: $venueSlug"
+        )
+    }
+
+    suspend fun fetchVenueData(venueSlug: String): VenueData = coroutineScope {
         val staticData = async { getStaticVenueData(venueSlug) }
         val dynamicData = async { getDynamicVenueData(venueSlug) }
-        Pair(staticData.await(), dynamicData.await())
+        VenueData(staticData.await(), dynamicData.await())
     }
 }

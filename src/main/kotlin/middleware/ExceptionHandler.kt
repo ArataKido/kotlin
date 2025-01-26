@@ -9,7 +9,6 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 
 object ExceptionHandler {
-
     suspend fun handle(
         call: ApplicationCall,
         cause: Throwable,
@@ -17,39 +16,49 @@ object ExceptionHandler {
     ) {
         when (cause) {
             is HttpException -> {
-                call.respond(
-                    HttpStatusCode.NotFound,
-                    ExceptionResponse(cause.message ?: cause.toString(), cause.statusCode)
-                )
+                respondWithException(call, HttpStatusCode.NotFound, cause)
             }
 
             is OutOfRangeException -> {
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    ExceptionResponse(cause.message ?: cause.toString(), cause.statusCode)
-                )
+                respondWithException(call, HttpStatusCode.BadRequest, cause)
             }
 
             is InvalidCoordinatesException -> {
-                call.respond(
-                    HttpStatusCode.InternalServerError,
-                    ExceptionResponse(cause.message ?: cause.toString(), cause.statusCode)
-                )
+                respondWithException(call, HttpStatusCode.InternalServerError, cause)
             }
 
-            else -> {
-                // All the other Exceptions become status 500, with more info in development mode.
-                if (developmentMode) {
-                    // Printout stacktrace on console
-                    cause.stackTrace.forEach { println(it) }
-                    call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
-                } else {
-                    // We are in production, so only minimal info.
-                    call.respondText(text = "Internal Error", status = HttpStatusCode.InternalServerError)
-                }
-            }
+            else -> handleGenericException(call, cause, developmentMode)
+        }
+    }
+    private suspend fun respondWithException(
+        call: ApplicationCall,
+        status: HttpStatusCode,
+        exception: Throwable
+    ) {
+        val message = exception.message ?: exception.toString()
 
+        call.respond(
+            status,
+            ExceptionResponse(message, status.value)
+        )
+    }
 
+    private suspend fun handleGenericException(
+        call: ApplicationCall,
+        cause: Throwable,
+        developmentMode: Boolean
+    ) {
+        if (developmentMode) {
+            cause.printStackTrace()
+            call.respondText(
+                text = "500 Internal Server Error: ${cause.localizedMessage}",
+                status = HttpStatusCode.InternalServerError
+            )
+        } else {
+            call.respondText(
+                text = "Internal Server Error",
+                status = HttpStatusCode.InternalServerError
+            )
         }
     }
 }

@@ -14,7 +14,7 @@ fun Application.configureHTTP() {
             version = "1.0.0"
             description = "API documentation for my Ktor application."
         }
-        server() {
+        server {
             url = "http://localhost:8080"
             description = "Local development server"
         }

@@ -19,7 +19,6 @@ object DistanceCalculatorStrategies {
     }
 
     val pythagoras: DistanceFunction = { lat1: Double, lon1: Double, lat2: Double, lon2: Double ->
-
         val deltaLat = Math.toRadians(lat2 - lat1)
         val deltaLon = Math.toRadians(lon2 - lon1)
         val meanLat = Math.toRadians((lat1 + lat2) / 2)

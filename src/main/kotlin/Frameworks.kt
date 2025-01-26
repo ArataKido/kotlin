@@ -20,7 +20,7 @@ fun Application.configureFrameworks() {
 }
 
 fun appModule() = module {
-    single { loadConfig() }
+    single { Config }
     single { get<Config>().httpClient }
     single { get<Config>().apiBaseUrl }
     single { get<Config>().maxRetries }
