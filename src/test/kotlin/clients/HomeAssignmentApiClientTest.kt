@@ -15,11 +15,17 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+/**
+ * Test class for HomeAssignmentApiClient
+ */
 class HomeAssignmentApiClientTest {
 
     private lateinit var client: HttpClient
     private lateinit var apiClient: HomeAssignmentApiClient
 
+    /**
+     * Set up the test environment before each test
+     */
     @Before
     fun setup() {
         val mockEngine = MockEngine { request ->
@@ -31,7 +37,6 @@ class HomeAssignmentApiClientTest {
                         headers = headersOf(HttpHeaders.ContentType, "application/json")
                     )
                 }
-
                 request.url.encodedPath.endsWith("/dynamic") -> {
                     respond(
                         content = Json.encodeToString(mockDynamicResponse),
@@ -39,7 +44,6 @@ class HomeAssignmentApiClientTest {
                         headers = headersOf(HttpHeaders.ContentType, "application/json")
                     )
                 }
-
                 else -> error("Unhandled ${request.url.encodedPath}")
             }
         }
@@ -48,6 +52,9 @@ class HomeAssignmentApiClientTest {
         apiClient = HomeAssignmentApiClient(client, Config.apiBaseUrl)
     }
 
+    /**
+     * Test fetchVenueData returns correct VenueData for valid venueSlug
+     */
     @Test
     fun `fetchVenueData returns correct VenueData for valid venueSlug`() = testApplication {
         runBlocking {
@@ -58,6 +65,9 @@ class HomeAssignmentApiClientTest {
         }
     }
 
+    /**
+     * Test fetchVenueData throws HttpException for non-200 response on static data
+     */
     @Test
     fun `fetchVenueData throws HttpException for non-200 response on static data`() = testApplication {
         val errorMockEngine = MockEngine { request ->
@@ -69,7 +79,6 @@ class HomeAssignmentApiClientTest {
                         headers = headersOf(HttpHeaders.ContentType, "application/json")
                     )
                 }
-
                 else -> error("Unhandled ${request.url.encodedPath}")
             }
         }
@@ -84,6 +93,9 @@ class HomeAssignmentApiClientTest {
         }
     }
 
+    /**
+     * Test fetchVenueData throws HttpException for non-200 response on dynamic data
+     */
     @Test
     fun `fetchVenueData throws HttpException for non-200 response on dynamic data`() = testApplication {
         val errorMockEngine = MockEngine { request ->
@@ -95,7 +107,6 @@ class HomeAssignmentApiClientTest {
                         headers = headersOf(HttpHeaders.ContentType, "application/json")
                     )
                 }
-
                 request.url.encodedPath.endsWith("/static") -> {
                     respond(
                         content = Json.encodeToString(mockStaticResponse),
@@ -103,7 +114,6 @@ class HomeAssignmentApiClientTest {
                         headers = headersOf(HttpHeaders.ContentType, "application/json")
                     )
                 }
-
                 else -> error("Unhandled ${request.url.encodedPath}")
             }
         }
@@ -118,6 +128,9 @@ class HomeAssignmentApiClientTest {
         }
     }
 
+    /**
+     * Test fetchVenueData throws HttpException for network error
+     */
     @Test
     fun `fetchVenueData throws HttpException for network error`() = testApplication {
         val errorMockEngine = MockEngine { _ ->
@@ -135,8 +148,8 @@ class HomeAssignmentApiClientTest {
     }
 
     companion object {
-        private val venueLat = 59.3489
-        private val venueLon = 18.0686
+        private const val venueLat = 59.3489
+        private const val venueLon = 18.0686
 
         private val mockStaticResponse = VenueStaticResponse(
             staticVenueRaw = StaticVenueRaw(
@@ -161,3 +174,4 @@ class HomeAssignmentApiClientTest {
         )
     }
 }
+

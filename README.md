@@ -1,45 +1,72 @@
-# dcop
+# Kotlin Delivery API
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
-
-Here are some useful links to get you started:
-
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need
-  to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
+This repository implements a Kotlin-based delivery order pricing API using Ktor. The application is designed to calculate delivery order prices dynamically based on user input and predefined business rules.
 
 ## Features
+- **REST API**:
+  - Provides endpoints for delivery pricing.
+  - Validates user input with detailed error messages.
+- **Integration with APIs**:
+  - Fetches venue-specific data dynamically from a remote API.
+- **Custom Middleware**:
+  - Centralized exception handling.
+  - Logging middleware for tracking requests and responses.
+- **Modular Architecture**:
+  - Uses Koin for dependency injection.
+  - Separation of concerns via services, clients, and utilities.
 
-Here's a list of features included in this project:
+## Installation
+1. Build the project:
+  ```bash
+    ./gradlew build
+  ```
+2. Run the application:
+  ```bash
+    ./gradlew run
+  ```
+3. Run test:
+  ```bash
+    ./gradlew test
+  ```
 
-| Name                                                                   | Description                                                                        |
-| ------------------------------------------------------------------------|------------------------------------------------------------------------------------ |
-| [Call Logging](https://start.ktor.io/p/call-logging)                   | Logs client requests                                                               |
-| [Routing](https://start.ktor.io/p/routing)                             | Provides a structured routing DSL                                                  |
-| [OpenAPI](https://start.ktor.io/p/openapi)                             | Serves OpenAPI documentation                                                       |
-| [Content Negotiation](https://start.ktor.io/p/content-negotiation)     | Provides automatic content conversion according to Content-Type and Accept headers |
-| [kotlinx.serialization](https://start.ktor.io/p/kotlinx-serialization) | Handles JSON serialization using kotlinx.serialization library                     |
-| [Koin](https://start.ktor.io/p/koin)                                   | Provides dependency injection                                                      |
+## API Endpoints
+### `GET /api/v1/delivery-order-price`
+- Description: Calculates the delivery order price based on user input.
 
-## Building & Running
+- Parameters:
 
-To build or run the project, use one of the following tasks:
-
-| Task                          | Description                                                          |
-| -------------------------------|---------------------------------------------------------------------- |
-| `./gradlew test`              | Run the tests                                                        |
-| `./gradlew build`             | Build everything                                                     |
-| `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `run`                         | Run the server                                                       |
-| `runDocker`                   | Run using the local docker image                                     |
-
-If the server starts successfully, you'll see the following output:
-
+- - venue_slug (string): The venue identifier.
+- - cart_value (integer): Total value of the items in the shopping cart.
+- - user_lat, user_lon (float): User's latitude and longitude coordinates.
+- - Response:
+```json
+{
+  "total_price": 1500,
+  "small_order_surcharge": 200,
+  "cart_value": 1000,
+  "delivery": {
+    "fee": 300,
+    "distance": 5000
+  }
+}
 ```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
-```
+- Error Handling:
+- -Returns appropriate HTTP status codes and error messages for missing or invalid parameters.
+## Code Highlights
+### Core Components
+- `Application.kt`: Main entry point. Configures routes, middleware, and services.
+- `Config.kt`: Handles application settings and HTTP client configuration.
+- `Frameworks.kt`: Manages dependency injection using Koin.
+### Business Logic
+- `DeliveryOrderPriceServiceImpl`: Implements the logic for calculating delivery prices, leveraging utility functions and external API data.
+### Utilities
+- `DeliveryFeeCalculator`: Calculates delivery fees based on distance and predefined ranges.
+- `DistanceCalculator`: Computes distances using Haversine or other strategies.
+### Testing
+The `src/test` directory includes unit tests for:
+
+- API clients
+- Delivery fee calculation logic
+- Delivery price service implementation
+
 
